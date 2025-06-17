@@ -3,8 +3,6 @@ body { font-family: Arial; background-color: floralwhite;}
     .ip { color: #666; font-size: 14px; }
     button {
       border-radius: 3px;
-      width: 42px;
-      font-size: 100px;
     }
     textarea {
        border-radius: 10px;
