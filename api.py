@@ -42,4 +42,5 @@ def get_logs():
     return jsonify(data)
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))  # تستخدم بورت من متغير البيئة أو الافتراضي 10000Add commentMore actions
+    app.run(host="0.0.0.0", port=port)
