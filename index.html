@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IDK CHAT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="login" style="text-align: center; margin-top: 100px;">
+    <h2>Enter your username</h2>
+    <input type="text" id="usernameInput" placeholder="Your name">
+    <button onclick="login()">Start Chat</button>
+  </div>
+
+  <div id="chat" style="display: none;">
+    <h2 id="welcomeMsg"></h2>
+    <div id="logContainer"></div>
+
+    <div class="input-row">
+      <textarea id="text" placeholder="Your message" rows="2"></textarea>
+      <button id="submit" onclick="sendText()">
+        <img src="message.png" alt="Send">
+      </button>
+    </div>
+  </div>
+
+  <script>
+    
+    window.onload = function () {
+  const savedUsername = localStorage.getItem('chat_username');
+  if (savedUsername) {
+    const el = document.getElementById("welcomeMsg");
+    if (el) el.textContent = `Welcome again ${savedUsername} 👋`;
+  }
+};
+    lastMessageTime = null;
+    function login() {
+  const username = document.getElementById('usernameInput').value.trim();
+  if (!username) return alert("Please enter your name");
+
+  localStorage.setItem('chat_username', username);
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('chat').style.display = 'block';
+
+  document.getElementById("welcomeMsg").textContent = `Welcome ${username} 👋`;
+
+  loadLogs();
+  setInterval(loadLogs, 3000);
+}
+
+    function sendText() {
+      const text = document.getElementById('text').value.trim();
+      if (!text) return;
+
+      const username = localStorage.getItem('chat_username');
+
+      fetch('https://myapi-jjyy.onrender.com/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-username': username // ← نرسل اسم المستخدم هنا
+        },
+        body: JSON.stringify({ message: text })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('text').value = '';
+        loadLogs(); // تحديث سريع بعد الإرسال
+      })
+      .catch(err => {
+        console.error("Send failed:", err);
+      });
+    }
+
+    function loadLogs() {
+      fetch("https://myapi-jjyy.onrender.com/messages")
+        .then(response => {
+          const contentType = response.headers.get("Content-Type");
+          if (!contentType || !contentType.includes("application/json")) {
+            throw new Error("Invalid content type: " + contentType);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const container = document.getElementById("logContainer");
+
+          data.forEach(log => {
+            if (lastMessageTime && log.time <= lastMessageTime) return;
+
+            const div = document.createElement("div");
+            div.className = "log";
+            div.innerHTML = `<div class="chat-message">
+              <strong>Message:</strong> ${log.message}
+              <span class="ip">user: ${log.ip}</span>
+              <span class="ip">TimeStamp: ${log.time}</span>
+            </div>`;
+            container.appendChild(div);
+          });
+
+          if (data.length > 0) {
+            lastMessageTime = data[data.length - 1].time;
+            container.scrollTop = container.scrollHeight;
+          }
+        })
+        .catch(error => {
+          console.error("Error loading messages:", error.message);
+          document.getElementById("logContainer").textContent = "⚠️ Failed to load messages.";
+        });
+    }
+
+    // إذا موجود اسم مستخدم، نبدأ تلقائيًا
+    if (localStorage.getItem('chat_username')) {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('chat').style.display = 'block';
+      loadLogs();
+      setInterval(loadLogs, 3000);
+    }
+  </script>
+<footer>
+  <div class="footer-content">
+    <strong>This Site Is made By <span class="brand">RPP</span></strong>
+
+    <div class="social">
+      <a href="https://github.com/rayan511x55x" target="_blank" class="icon-link github">
+        <img src="github.png" alt="GitHub"> GitHub
+      </a>
+      <a href="https://www.tiktok.com/@MS4wLjABAAAAVZb6jtAsHK-WE0Nyl1C40MT7aqS6_EaGlXksv3JYei1WaVcHK6ihEI71IaCUeZ72?_t=ZS-8xI86PGDfQg&_r=1" target="_blank" class="icon-link tiktok">
+        <img src="tik-tok.png" alt="TikTok"> TikTok
+      </a>
+      <div class="icon-link discord">
+        <img src="discord.png" alt="Discord"> Discord: <span>.bas</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

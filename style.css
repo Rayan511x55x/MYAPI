@@ -1,0 +1,233 @@
+body { font-family: Arial; padding: 20px; background-color: floralwhite;}
+    .log { margin-bottom: 10px; border-bottom: 1px solid #ccc; padding: 10px; }
+    .ip { color: #666; font-size: 14px; }
+    button {
+      border-radius: 3px;
+      width: 42px;
+      font-size: 100px;
+    }
+    textarea {
+       border-radius: 10px;
+    }
+.chat-message {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-left: 10px solid navajowhite;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 12px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.chat-message:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chat-message strong {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.chat-message .ip {
+  font-size: 14px;
+  color: #555;
+  display: block;
+  margin-top: 2px;
+}
+#logContainer {
+  max-height: 700px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  background-color: floralwhite;
+}
+
+#text {
+  margin-top: 4px;
+  width: 50px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: top;
+}
+button {
+  outline: none;
+  -webkit-tap-highlight-color: transparent; /* ← يشيل الأزرق */
+  -webkit-focus-ring-color: transparent;    /* ← أمان إضافي */
+}
+#submit {
+  background-color: white;
+  margin-top: 15px;
+  width: 70px;
+  height: 60px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: antiquewhite;
+  margin-left: 5px;
+}
+
+#submit:hover {
+  transform: scale(1);
+  transition: transform 0.1s ease;
+  background-color: navajowhite;
+  transition: background-color 0.5s ease;
+}
+.input-row {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.input-row textarea {
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.input-row button {
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.input-row button img {
+  width: 24px;
+  height: 24px;
+}
+#submit {
+  position: relative;
+  overflow: hidden;                    /* يمنع الصورة من الخروج خارج الإطار */
+  background-color: antiquewhite;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 50px;                         /* عرض ثابت */
+  height: 50px;                        /* ارتفاع ثابت */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent; /* يشيل الأزرق عند اللمس */
+}
+
+#submit:hover {
+  background-color: navajowhite;           /* لون مختلف عند تمرير الماوس */
+}
+
+#submit img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+#submit:hover img {
+  transform: translateX(36.5px);          /* تحريك الصورة لليمين عند hover */
+}
+
+#welcomeMsg {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+footer {
+  display: flex;
+  margin-top: 100px;
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+footer {
+  border-radius: 10px;
+  background: #121212;
+  color: #e0e0e0;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 1px solid #2e2e2e;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+footer strong {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.brand {
+  color: #00e0ff;
+  font-weight: bold;
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #bcbcbc;
+  text-decoration: none;
+  background-color: #1f1f1f;
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.icon-link img {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.icon-link:hover {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.icon-link:hover img {
+  transform: scale(1.1);
+}
+
+.discord span {
+  color: #7289da;
+  font-weight: bold;
+}
+
+.email {
+  font-size: 15px;
+  color: #c0c0c0;
+  opacity: 0.8;
+}
