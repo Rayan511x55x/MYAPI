@@ -22,7 +22,7 @@ def send_message():
 
     log_entry = {
         "message": message,
-        "ip": request.remote_addr,
+        "ip": request.headers.get("x-username"),
         "time": datetime.now().isoformat()
     }
 
@@ -34,13 +34,12 @@ def send_message():
         json.dump(old_data, f, indent=4)
 
     return jsonify({"status": "saved", "entry": log_entry})
-
+    
 @app.route("/messages", methods=["GET"])
 def get_logs():
     with open(LOG_FILE, "r") as f:
         data = json.load(f)
     return jsonify(data)
-
+    
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 10000))  # تستخدم بورت من متغير البيئة أو الافتراضي 10000
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
